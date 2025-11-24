@@ -6,13 +6,14 @@
 <title>GroundSoft</title>
 <style>
   /* --------------------- Base --------------------- */
-  body {
+  html, body {
     margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #0e0e0e;
     color: #f5f5f5;
     scroll-behavior: smooth;
-    overflow-x: hidden; /* prevents horizontal scroll */
+    overflow-x: hidden;
   }
 
   /* --------------------- Navbar --------------------- */
@@ -26,7 +27,7 @@
     display: flex;
     justify-content: center;
     padding: 15px 0;
-    z-index: 100;
+    z-index: 10;
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
   }
   nav a {
@@ -42,8 +43,8 @@
 
   /* --------------------- Header --------------------- */
   header {
-    height: 100vh; /* full viewport height */
-    padding: 0; /* remove extra padding */
+    height: 100vh;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,6 +55,7 @@
     animation: gradientShift 15s ease infinite;
     position: relative;
     overflow: hidden;
+    z-index: 1;
   }
   @keyframes gradientShift {
     0% { background-position: 0% 50%; }
@@ -80,42 +82,24 @@
     max-width: 1000px;
     margin: auto;
     position: relative;
+    z-index: 2;
   }
   .about {
     text-align: center;
   }
 
-  /* --------------------- Animated background for founders --------------------- */
+  /* --------------------- Founders --------------------- */
   .founders {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
     margin-top: 40px;
-    perspective: 1000px;
     position: relative;
+    z-index: 2;
   }
-  .founders::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(252,163,17,0.05) 0%, transparent 70%);
-    animation: foundersGlow 8s linear infinite;
-    pointer-events: none;
-    z-index: 0;
-  }
-  @keyframes foundersGlow {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(180deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  /* --------------------- Cards --------------------- */
   .card {
-    background: #1a1a1a;
+    background: rgba(26,26,26,0.7);
     border-radius: 12px;
     padding: 20px;
     width: 260px;
@@ -123,17 +107,16 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
     transform: translateY(30px);
     opacity: 0;
-    transition: all 0.6s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    z-index: 1;
+    transition: all 0.6s ease, transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   }
   .card.visible {
     transform: translateY(0);
     opacity: 1;
   }
-  .card:hover {
-    transform: translateY(-15px) scale(1.05);
-    box-shadow: 0 0 40px rgba(252,163,17,0.4);
+  .card:hover, .card:active {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 0 40px rgba(252,163,17,0.5);
+    background: rgba(26,26,26,1); /* solid on hover/click */
   }
   .card img {
     width: 120px;
@@ -163,40 +146,43 @@
     padding: 25px;
     opacity: 0.6;
     font-size: 0.9rem;
+    position: relative;
+    z-index: 2;
   }
 
   /* --------------------- Particle Canvas --------------------- */
   #particle-canvas {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0; /* behind everything */
   }
 </style>
 </head>
 <body>
 
-<!-- --------------------- Navbar --------------------- -->
+<!-- Navbar -->
 <nav>
   <a href="#header">Home</a>
   <a href="#about">About</a>
 </nav>
 
-<!-- --------------------- Header --------------------- -->
+<!-- Header -->
 <header id="header">
   <canvas id="particle-canvas"></canvas>
   <h1>GroundSoft</h1>
   <p id="tagline"></p>
 </header>
 
+<!-- About Section -->
 <section class="about" id="about">
   <h2>About Us</h2>
   <p>We are a team of passionate founders building powerful and elegant software solutions.</p>
 
-  <div class="founders" id="founders">
+  <div class="founders">
     <div class="card">
       <img src="founder1.jpg" alt="Founder 1" />
       <h3>Alexander Voynov</h3>
@@ -215,14 +201,12 @@
   </div>
 </section>
 
-<footer id="footer">
+<footer>
   © 2025 GroundSoft. All rights reserved.
 </footer>
 
 <script>
-// ---------------------------
-// Typing effect for header tagline
-// ---------------------------
+// Typing effect
 const tagline = "Innovating software for the next generation";
 const taglineEl = document.getElementById("tagline");
 let i = 0;
@@ -235,9 +219,7 @@ function typeEffect() {
 }
 typeEffect();
 
-// ---------------------------
-// Fade-in effect for founder cards
-// ---------------------------
+// Fade-in for cards
 const cards = document.querySelectorAll('.card');
 function handleCards() {
   const triggerBottom = window.innerHeight * 0.85;
@@ -251,21 +233,16 @@ function handleCards() {
 window.addEventListener('scroll', handleCards);
 window.addEventListener('load', handleCards);
 
-// ---------------------------
-// Smooth scrolling for navbar
-// ---------------------------
-const navLinks = document.querySelectorAll('nav a');
-navLinks.forEach(link => {
+// Smooth scroll
+document.querySelectorAll('nav a').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
-    const targetId = link.getAttribute('href').substring(1);
-    document.getElementById(targetId).scrollIntoView({behavior: 'smooth'});
+    document.getElementById(link.getAttribute('href').substring(1))
+      .scrollIntoView({behavior: 'smooth'});
   });
 });
 
-// ---------------------------
-// Particle effect with connections & repulsion
-// ---------------------------
+// Particle effect
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
@@ -286,58 +263,42 @@ function Particle() {
   this.speedY = (Math.random() - 0.5) * 0.5;
   this.opacity = Math.random() * 0.5 + 0.3;
 }
-
 Particle.prototype.update = function() {
   this.x += this.speedX;
   this.y += this.speedY;
-
-  // Bounce off edges
   if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
   if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-
-  // Mouse repulsion
   if(mouse.x && mouse.y){
     let dx = this.x - mouse.x;
     let dy = this.y - mouse.y;
     let dist = Math.sqrt(dx*dx + dy*dy);
     if(dist < mouse.radius){
       let angle = Math.atan2(dy, dx);
-      let repelForce = (mouse.radius - dist)/mouse.radius;
-      this.x += Math.cos(angle) * repelForce * 3;
-      this.y += Math.sin(angle) * repelForce * 3;
+      let repel = (mouse.radius - dist)/mouse.radius;
+      this.x += Math.cos(angle) * repel * 3;
+      this.y += Math.sin(angle) * repel * 3;
     }
   }
 };
-
 Particle.prototype.draw = function() {
   ctx.beginPath();
-  ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+  ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
   ctx.fillStyle = `rgba(252,163,17,${this.opacity})`;
   ctx.fill();
 };
 
-// Initialize particles
-for(let i=0; i<100; i++) {
-  particles.push(new Particle());
-}
+for(let i=0;i<100;i++) particles.push(new Particle());
 
-// Track mouse position
-canvas.addEventListener('mousemove', function(e){
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-canvas.addEventListener('mouseleave', function(){ mouse.x = null; mouse.y = null; });
+canvas.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+canvas.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
 
-// Animate particles and draw connections
 function animateParticles() {
   ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  // Draw connections
   for(let i=0;i<particles.length;i++){
     for(let j=i+1;j<particles.length;j++){
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
+      let dx = particles[i].x - particles[j].x;
+      let dy = particles[i].y - particles[j].y;
+      let dist = Math.sqrt(dx*dx + dy*dy);
       if(dist < 120){
         ctx.beginPath();
         ctx.strokeStyle = `rgba(252,163,17,${1 - dist/120})`;
@@ -348,17 +309,10 @@ function animateParticles() {
       }
     }
   }
-
-  // Draw particles
-  particles.forEach(p => {
-    p.update();
-    p.draw();
-  });
-
+  particles.forEach(p => { p.update(); p.draw(); });
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
 </script>
-
 </body>
 </html>
