@@ -160,6 +160,43 @@
     pointer-events: none;
     z-index: 0; /* behind everything */
   }
+  /* --------------------- Big monitor scaling --------------------- */
+  @media (min-width: 1600px) {
+  header h1 {
+    font-size: 4.5rem;
+  }
+
+  header p {
+    font-size: 1.8rem;
+  }
+
+  section {
+    max-width: 1400px;
+    padding: 120px 40px;
+  }
+
+  .founders {
+    gap: 60px; /* spread cards more on huge monitors */
+  }
+
+  .card {
+    width: 300px;
+    padding: 30px;
+  }
+
+  .card h3 {
+    font-size: 1.5rem;
+  }
+
+  .card p {
+    font-size: 1.1rem;
+  }
+
+  nav a {
+    font-size: 1.2rem;
+    margin: 0 35px;
+  }
+ }
 </style>
 </head>
 <body>
