@@ -84,8 +84,51 @@
     position: relative;
     z-index: 2;
   }
-  .about {
+
+  .about,
+  .vision {
     text-align: center;
+  }
+
+  /* --------------------- Vision Card --------------------- */
+  .vision-card {
+    margin-top: 40px;
+    background: rgba(26,26,26,0.7);
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    overflow: hidden;
+    max-height: 120px;
+  }
+
+  .vision-card:hover,
+  .vision-card.expanded {
+    box-shadow: 0 0 40px rgba(252,163,17,0.5);
+    background: rgba(26,26,26,1);
+    max-height: 500px;
+  }
+
+  .vision-short {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    opacity: 0.95;
+  }
+
+  .vision-full {
+    font-size: 1rem;
+    opacity: 0;
+    max-height: 0;
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+  }
+
+  .vision-card:hover .vision-full,
+  .vision-card.expanded .vision-full {
+    opacity: 0.85;
+    max-height: 400px;
   }
 
   /* --------------------- Founders --------------------- */
@@ -95,8 +138,6 @@
     justify-content: center;
     gap: 40px;
     margin-top: 40px;
-    position: relative;
-    z-index: 2;
   }
   .card {
     background: rgba(26,26,26,0.7);
@@ -132,116 +173,39 @@
     border-color: #fca311;
   }
 
-  /* --------------------- Vision Card --------------------- */
-  .vision-card {
-    background: rgba(26,26,26,0.7);
-    border-radius: 14px;
-    padding: 30px;
-    max-width: 700px;
-    margin: 60px auto 0 auto;
-    text-align: center;
-    box-shadow: 0 0 25px rgba(0,0,0,0.4);
-    transition: all 0.4s ease;
-    overflow: hidden;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .vision-card h3 {
-    font-size: 1.6rem;
-    margin-bottom: 15px;
-  }
-
-  .vision-card .preview-text {
-    font-size: 1.05rem;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-  }
-
-  .vision-card .full-text {
-    font-size: 1rem;
-    margin-top: 15px;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.4s ease, max-height 0.4s ease;
-  }
-
-  .vision-card:hover {
-    background: rgba(26,26,26,1);
-    box-shadow: 0 0 40px rgba(252,163,17,0.4);
-    transform: translateY(-8px);
-  }
-
-  .vision-card:hover .full-text {
-    opacity: 1;
-    max-height: 500px;
-  }
-
-  .vision-card:hover .preview-text {
-    opacity: 0;
-  }
-
-  .vision-card.active .full-text {
-    opacity: 1;
-    max-height: 500px;
-  }
-  .vision-card.active .preview-text {
-    opacity: 0;
-  }
-
-  /* --------------------- Contact Section --------------------- */
+  /* --------------------- Contact --------------------- */
   .contact {
     text-align: center;
+    max-width: 600px;
   }
 
-  .contact-form {
-    max-width: 500px;
-    margin: 40px auto 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .contact-form input,
-  .contact-form textarea {
+  .contact input,
+  .contact textarea {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
+    margin: 10px 0 20px;
     border-radius: 8px;
     border: none;
-    background: #1a1a1a;
+    background: #1c1c1c;
     color: #fff;
     font-size: 1rem;
-    outline: none;
-    transition: 0.3s ease;
   }
 
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    box-shadow: 0 0 10px rgba(252,163,17,0.5);
-    background: #222;
-  }
-
-  /* Centered submit button */
-  .contact-form button {
-    width: 200px;
+  .contact button {
+    display: block;
     margin: 0 auto;
-    padding: 14px;
+    padding: 12px 30px;
     background: #fca311;
-    color: #000;
     border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
+    color: #000;
     font-weight: bold;
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.3s ease;
-    text-align: center;
   }
 
-  .contact-form button:hover {
-    background: #ffb933;
-    transform: translateY(-3px);
-    box-shadow: 0 0 15px rgba(252,163,17,0.6);
+  .contact button:hover {
+    background: #ffaa33;
   }
 
   /* --------------------- Footer --------------------- */
@@ -250,8 +214,6 @@
     padding: 25px;
     opacity: 0.6;
     font-size: 0.9rem;
-    position: relative;
-    z-index: 2;
   }
 
   /* --------------------- Particle Canvas --------------------- */
@@ -271,6 +233,7 @@
 <!-- Navbar -->
 <nav>
   <a href="#header">Home</a>
+  <a href="#vision">Vision</a>
   <a href="#about">About</a>
   <a href="#contact">Contact</a>
 </nav>
@@ -281,6 +244,20 @@
   <h1>GroundSoft</h1>
   <p id="tagline"></p>
 </header>
+
+<!-- Vision Section -->
+<section class="vision" id="vision">
+  <h2>Our Vision</h2>
+  <div class="vision-card" id="visionCard">
+    <p class="vision-short">Creating software that feels alive.</p>
+    <p class="vision-full">
+      At GroundSoft, our vision is to create a world where software feels alive — 
+      intuitive, adaptive, and seamlessly integrated into people’s lives. 
+      We believe in crafting technology that not only solves problems but inspires progress, 
+      elevates creativity, and empowers businesses to move faster than ever before.
+    </p>
+  </div>
+</section>
 
 <!-- About Section -->
 <section class="about" id="about">
@@ -304,36 +281,15 @@
       <p>Co-Founder, Product & Experience</p>
     </div>
   </div>
-
-  <!-- Vision Card -->
-  <div class="vision-card">
-    <h3>Our Vision</h3>
-    <p class="preview-text">
-      Building the next generation of powerful, elegant and intelligent software...
-    </p>
-    <p class="full-text">
-      At GroundSoft, our vision is to redefine how people interact with technology — 
-      creating software that is not only high-performance and scalable, but intuitive, 
-      beautiful and meaningful. We believe in craftsmanship, innovation without compromise, 
-      and solutions that empower individuals and businesses to operate at their highest potential.
-    </p>
-  </div>
-
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="contact">
+<section class="contact" id="contact">
   <h2>Contact Us</h2>
-  <p>Have a question? Send us a message and we’ll get back to you.</p>
-
-  <form action="https://formsubmit.co/groundsoft.bg@gmail.com" method="POST" class="contact-form">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you">
-
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
+  <form action="https://formspree.io/f/mjkvollg" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
     <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-
     <button type="submit">Send Message</button>
   </form>
 </section>
@@ -343,7 +299,7 @@
 </footer>
 
 <script>
-// Typing effect
+/* Typing effect */
 const tagline = "Innovating software for the next generation";
 const taglineEl = document.getElementById("tagline");
 let i = 0;
@@ -356,13 +312,18 @@ function typeEffect() {
 }
 typeEffect();
 
-// Fade-in cards
+/* Vision Card Expand */
+document.getElementById("visionCard").addEventListener("click", function() {
+  this.classList.toggle("expanded");
+});
+
+/* Fade-in for cards */
 const cards = document.querySelectorAll('.card');
 function handleCards() {
   const triggerBottom = window.innerHeight * 0.85;
   cards.forEach(card => {
     const cardTop = card.getBoundingClientRect().top;
-    if (cardTop < triggerBottom) {
+    if(cardTop < triggerBottom) {
       card.classList.add('visible');
     }
   });
@@ -370,26 +331,11 @@ function handleCards() {
 window.addEventListener('scroll', handleCards);
 window.addEventListener('load', handleCards);
 
-// Smooth scroll
-document.querySelectorAll('nav a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    document.getElementById(link.getAttribute('href').substring(1))
-      .scrollIntoView({behavior: 'smooth'});
-  });
-});
-
-// Mobile tap reveal for Vision card
-const visionCard = document.querySelector('.vision-card');
-visionCard.addEventListener('click', () => {
-  visionCard.classList.toggle('active');
-});
-
-// Particle Background with connecting lines
+/* Particle System (with lines) */
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
-let mouse = { x: null, y: null, radius: 100 };
+let mouse = {x: null, y: null, radius: 100};
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
@@ -406,18 +352,18 @@ function Particle() {
   this.speedY = (Math.random() - 0.5) * 0.5;
   this.opacity = Math.random() * 0.5 + 0.3;
 }
-
 Particle.prototype.update = function() {
   this.x += this.speedX;
   this.y += this.speedY;
-  if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-  if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
 
-  if (mouse.x && mouse.y) {
+  if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+  if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+  if(mouse.x && mouse.y){
     let dx = this.x - mouse.x;
     let dy = this.y - mouse.y;
     let dist = Math.sqrt(dx*dx + dy*dy);
-    if (dist < mouse.radius) {
+    if(dist < mouse.radius){
       let angle = Math.atan2(dy, dx);
       let repel = (mouse.radius - dist)/mouse.radius;
       this.x += Math.cos(angle) * repel * 3;
@@ -425,7 +371,6 @@ Particle.prototype.update = function() {
     }
   }
 };
-
 Particle.prototype.draw = function() {
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
@@ -433,22 +378,16 @@ Particle.prototype.draw = function() {
   ctx.fill();
 };
 
-for (let i = 0; i < 100; i++) particles.push(new Particle());
+for(let i=0;i<100;i++) particles.push(new Particle());
 
-canvas.addEventListener('mousemove', e => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-canvas.addEventListener('mouseleave', () => {
-  mouse.x = null;
-  mouse.y = null;
-});
+canvas.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+canvas.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
 
 function animateParticles() {
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  for (let i=0;i<particles.length;i++){
-    for (let j=i+1;j<particles.length;j++){
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
       let dx = particles[i].x - particles[j].x;
       let dy = particles[i].y - particles[j].y;
       let dist = Math.sqrt(dx*dx + dy*dy);
@@ -464,11 +403,10 @@ function animateParticles() {
   }
 
   particles.forEach(p => { p.update(); p.draw(); });
+
   requestAnimationFrame(animateParticles);
 }
-
 animateParticles();
 </script>
-
 </body>
 </html>
