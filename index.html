@@ -101,6 +101,8 @@
   /* --------------------- Vision Section --------------------- */
   .vision {
     text-align: center;
+    max-width: 1000px;
+    margin: auto;
   }
 
   .vision-card {
@@ -115,6 +117,7 @@
     cursor: pointer;
     overflow: hidden;
     max-height: 120px;
+    box-sizing: border-box;
   }
 
   .vision-card:hover,
@@ -143,14 +146,27 @@
     max-height: 400px;
   }
 
-  /* --------------------- Mobile Vision Fix --------------------- */
+  /* --------------------- FINAL Mobile Vision Fix --------------------- */
   @media (max-width: 600px) {
-    .vision-card {
-      padding: 20px;
+    .vision {
+      width: 100%;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
+
+    .vision-card {
+      width: 100%;
+      max-width: 100%;
+      margin: 20px auto;
+      padding: 20px;
+      overflow-wrap: break-word;
+      box-sizing: border-box;
+    }
+
     .vision-short,
     .vision-full {
       text-align: left;
+      width: 100%;
     }
   }
 
@@ -218,7 +234,7 @@
     background: #1c1c1c;
     color: #fff;
     font-size: 1rem;
-    box-sizing: border-box; /* Fix overflow */
+    box-sizing: border-box;
   }
 
   .contact button {
