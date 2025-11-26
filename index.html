@@ -116,7 +116,7 @@
   .card:hover, .card:active {
     transform: translateY(-10px) scale(1.05);
     box-shadow: 0 0 40px rgba(252,163,17,0.5);
-    background: rgba(26,26,26,1); /* solid on hover/click */
+    background: rgba(26,26,26,1);
   }
   .card img {
     width: 120px;
@@ -131,13 +131,117 @@
     transform: scale(1.1);
     border-color: #fca311;
   }
-  .card h3 {
-    margin: 10px 0 5px 0;
-    font-size: 1.3rem;
+
+  /* --------------------- Vision Card --------------------- */
+  .vision-card {
+    background: rgba(26,26,26,0.7);
+    border-radius: 14px;
+    padding: 30px;
+    max-width: 700px;
+    margin: 60px auto 0 auto;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
   }
-  .card p {
+
+  .vision-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+
+  .vision-card .preview-text {
+    font-size: 1.05rem;
     opacity: 0.8;
-    font-size: 0.95rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .vision-card .full-text {
+    font-size: 1rem;
+    margin-top: 15px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+  }
+
+  .vision-card:hover {
+    background: rgba(26,26,26,1);
+    box-shadow: 0 0 40px rgba(252,163,17,0.4);
+    transform: translateY(-8px);
+  }
+
+  .vision-card:hover .full-text {
+    opacity: 1;
+    max-height: 500px;
+  }
+
+  .vision-card:hover .preview-text {
+    opacity: 0;
+  }
+
+  .vision-card.active .full-text {
+    opacity: 1;
+    max-height: 500px;
+  }
+  .vision-card.active .preview-text {
+    opacity: 0;
+  }
+
+  /* --------------------- Contact Section --------------------- */
+  .contact {
+    text-align: center;
+  }
+
+  .contact-form {
+    max-width: 500px;
+    margin: 40px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s ease;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    box-shadow: 0 0 10px rgba(252,163,17,0.5);
+    background: #222;
+  }
+
+  /* Centered submit button */
+  .contact-form button {
+    width: 200px;
+    margin: 0 auto;
+    padding: 14px;
+    background: #fca311;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-align: center;
+  }
+
+  .contact-form button:hover {
+    background: #ffb933;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(252,163,17,0.6);
   }
 
   /* --------------------- Footer --------------------- */
@@ -158,45 +262,8 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 0; /* behind everything */
+    z-index: 0;
   }
-  /* --------------------- Big monitor scaling --------------------- */
-  @media (min-width: 1600px) {
-  header h1 {
-    font-size: 4.5rem;
-  }
-
-  header p {
-    font-size: 1.8rem;
-  }
-
-  section {
-    max-width: 1400px;
-    padding: 120px 40px;
-  }
-
-  .founders {
-    gap: 60px; /* spread cards more on huge monitors */
-  }
-
-  .card {
-    width: 300px;
-    padding: 30px;
-  }
-
-  .card h3 {
-    font-size: 1.5rem;
-  }
-
-  .card p {
-    font-size: 1.1rem;
-  }
-
-  nav a {
-    font-size: 1.2rem;
-    margin: 0 35px;
-  }
- }
 </style>
 </head>
 <body>
@@ -205,6 +272,7 @@
 <nav>
   <a href="#header">Home</a>
   <a href="#about">About</a>
+  <a href="#contact">Contact</a>
 </nav>
 
 <!-- Header -->
@@ -236,6 +304,38 @@
       <p>Co-Founder, Product & Experience</p>
     </div>
   </div>
+
+  <!-- Vision Card -->
+  <div class="vision-card">
+    <h3>Our Vision</h3>
+    <p class="preview-text">
+      Building the next generation of powerful, elegant and intelligent software...
+    </p>
+    <p class="full-text">
+      At GroundSoft, our vision is to redefine how people interact with technology — 
+      creating software that is not only high-performance and scalable, but intuitive, 
+      beautiful and meaningful. We believe in craftsmanship, innovation without compromise, 
+      and solutions that empower individuals and businesses to operate at their highest potential.
+    </p>
+  </div>
+
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+  <h2>Contact Us</h2>
+  <p>Have a question? Send us a message and we’ll get back to you.</p>
+
+  <form action="https://formsubmit.co/groundsoft.bg@gmail.com" method="POST" class="contact-form">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you">
+
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
 </section>
 
 <footer>
@@ -256,13 +356,13 @@ function typeEffect() {
 }
 typeEffect();
 
-// Fade-in for cards
+// Fade-in cards
 const cards = document.querySelectorAll('.card');
 function handleCards() {
   const triggerBottom = window.innerHeight * 0.85;
   cards.forEach(card => {
     const cardTop = card.getBoundingClientRect().top;
-    if(cardTop < triggerBottom) {
+    if (cardTop < triggerBottom) {
       card.classList.add('visible');
     }
   });
@@ -279,11 +379,17 @@ document.querySelectorAll('nav a').forEach(link => {
   });
 });
 
-// Particle effect
+// Mobile tap reveal for Vision card
+const visionCard = document.querySelector('.vision-card');
+visionCard.addEventListener('click', () => {
+  visionCard.classList.toggle('active');
+});
+
+// Particle Background with connecting lines
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
-let mouse = {x: null, y: null, radius: 100};
+let mouse = { x: null, y: null, radius: 100 };
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
@@ -300,16 +406,18 @@ function Particle() {
   this.speedY = (Math.random() - 0.5) * 0.5;
   this.opacity = Math.random() * 0.5 + 0.3;
 }
+
 Particle.prototype.update = function() {
   this.x += this.speedX;
   this.y += this.speedY;
-  if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-  if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-  if(mouse.x && mouse.y){
+  if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+  if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+  if (mouse.x && mouse.y) {
     let dx = this.x - mouse.x;
     let dy = this.y - mouse.y;
     let dist = Math.sqrt(dx*dx + dy*dy);
-    if(dist < mouse.radius){
+    if (dist < mouse.radius) {
       let angle = Math.atan2(dy, dx);
       let repel = (mouse.radius - dist)/mouse.radius;
       this.x += Math.cos(angle) * repel * 3;
@@ -317,6 +425,7 @@ Particle.prototype.update = function() {
     }
   }
 };
+
 Particle.prototype.draw = function() {
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
@@ -324,15 +433,22 @@ Particle.prototype.draw = function() {
   ctx.fill();
 };
 
-for(let i=0;i<100;i++) particles.push(new Particle());
+for (let i = 0; i < 100; i++) particles.push(new Particle());
 
-canvas.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-canvas.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+canvas.addEventListener('mousemove', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+canvas.addEventListener('mouseleave', () => {
+  mouse.x = null;
+  mouse.y = null;
+});
 
 function animateParticles() {
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
+
+  for (let i=0;i<particles.length;i++){
+    for (let j=i+1;j<particles.length;j++){
       let dx = particles[i].x - particles[j].x;
       let dy = particles[i].y - particles[j].y;
       let dist = Math.sqrt(dx*dx + dy*dy);
@@ -346,10 +462,13 @@ function animateParticles() {
       }
     }
   }
+
   particles.forEach(p => { p.update(); p.draw(); });
   requestAnimationFrame(animateParticles);
 }
+
 animateParticles();
 </script>
+
 </body>
 </html>
