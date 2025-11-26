@@ -41,6 +41,19 @@
     color: #fca311;
   }
 
+  /* --------------------- Mobile Navbar Fix --------------------- */
+  @media (max-width: 600px) {
+    nav {
+      padding: 10px 0;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    nav a {
+      margin: 5px 10px;
+      font-size: 0.9rem;
+    }
+  }
+
   /* --------------------- Header --------------------- */
   header {
     height: 100vh;
@@ -85,12 +98,11 @@
     z-index: 2;
   }
 
-  .about,
+  /* --------------------- Vision Section --------------------- */
   .vision {
     text-align: center;
   }
 
-  /* --------------------- Vision Card --------------------- */
   .vision-card {
     margin-top: 40px;
     background: rgba(26,26,26,0.7);
@@ -131,7 +143,22 @@
     max-height: 400px;
   }
 
-  /* --------------------- Founders --------------------- */
+  /* --------------------- Mobile Vision Fix --------------------- */
+  @media (max-width: 600px) {
+    .vision-card {
+      padding: 20px;
+    }
+    .vision-short,
+    .vision-full {
+      text-align: left;
+    }
+  }
+
+  /* --------------------- About / Founders --------------------- */
+  .about {
+    text-align: center;
+  }
+
   .founders {
     display: flex;
     flex-wrap: wrap;
@@ -139,6 +166,7 @@
     gap: 40px;
     margin-top: 40px;
   }
+
   .card {
     background: rgba(26,26,26,0.7);
     border-radius: 12px;
@@ -148,17 +176,18 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
     transform: translateY(30px);
     opacity: 0;
-    transition: all 0.6s ease, transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    transition: all 0.6s ease;
   }
   .card.visible {
     transform: translateY(0);
     opacity: 1;
   }
-  .card:hover, .card:active {
+  .card:hover {
     transform: translateY(-10px) scale(1.05);
     box-shadow: 0 0 40px rgba(252,163,17,0.5);
     background: rgba(26,26,26,1);
   }
+
   .card img {
     width: 120px;
     height: 120px;
@@ -189,6 +218,7 @@
     background: #1c1c1c;
     color: #fff;
     font-size: 1rem;
+    box-sizing: border-box; /* Fix overflow */
   }
 
   .contact button {
@@ -203,9 +233,15 @@
     cursor: pointer;
     transition: 0.3s ease;
   }
-
   .contact button:hover {
     background: #ffaa33;
+  }
+
+  /* --------------------- Mobile Contact Fix --------------------- */
+  @media (max-width: 600px) {
+    .contact {
+      width: 90%;
+    }
   }
 
   /* --------------------- Footer --------------------- */
@@ -252,9 +288,9 @@
     <p class="vision-short">Creating software that feels alive.</p>
     <p class="vision-full">
       At GroundSoft, our vision is to create a world where software feels alive — 
-      intuitive, adaptive, and seamlessly integrated into people’s lives. 
-      We believe in crafting technology that not only solves problems but inspires progress, 
-      elevates creativity, and empowers businesses to move faster than ever before.
+      intuitive, adaptive, and seamlessly integrated into people's lives.
+      Technology should not only solve problems but inspire progress,
+      elevate creativity, and empower businesses to move faster than ever before.
     </p>
   </div>
 </section>
